@@ -3,28 +3,53 @@ import SideBar from "../submodules/SideBar";
 import kutman from "../../assets/Photos/kutman.png";
 import "./HomePage.css";
 
-function HomePage() {
+
+
+const HomePage = () => {
+  const cards = [
+    {
+      imgSrc: kutman,
+      altText: "Kutman",
+      title: "Mike's mindful morning",
+      description: "Course • Mindful Mike",
+    },
+    {
+      imgSrc: "https://assets.codepen.io/605876/person.png",
+      altText: "Person",
+      title: "John's journey to calm",
+      description: "Course • Peaceful John",
+    },
+  ];
+  const Card = ({ imgSrc, altText, title, description }) => (
+    <article className="card">
+      <figure>
+        <img src={imgSrc} alt={altText} loading="lazy" />
+      </figure>
+      <h2 className="card-title">{title}</h2>
+      <p className="card-description">{description}</p>
+    </article>
+  );
+  
   return (
-    <div>
-      <SideBar />
-      <h1>HomePage</h1>
-      <div className="cards-container">
-        <article>
-          <figure>
-            <img src={kutman} alt="Kutman" />
-          </figure>
-          <h2>Mike's mindful morning</h2>
-          <p>Course • Mindful Mike</p>
-        </article>
-        <article>
-          <figure>
-            <img src="https://assets.codepen.io/605876/person.png" alt="Person" />
-          </figure>
-          <h2>John's journey to calm</h2>
-          <p>Course • Peaceful John</p>
-        </article>
-      </div>
+    <>
+    <SideBar />
+    <div className="homepage">
+      <main className="main-content">
+        <h1 className="page-title">HomePage</h1>
+        <div className="cards-container">
+          {cards.map((card, index) => (
+            <Card
+              key={index}
+              imgSrc={card.imgSrc}
+              altText={card.altText}
+              title={card.title}
+              description={card.description}
+            />
+          ))}
+        </div>
+      </main>
     </div>
+    </>
   );
 }
 
