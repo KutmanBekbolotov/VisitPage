@@ -1,12 +1,30 @@
 import React from "react";
+import PropTypes from "prop-types";
 import SideBar from "../submodules/SideBar";
 import kutman from "../../assets/Photos/kutman.png";
 import "./HomePage.css";
 
 
+const Card = ({ imgSrc, altText, title, description }) => (
+  <article className="card">
+    <figure>
+      <img src={imgSrc} alt={altText} loading="lazy" />
+    </figure>
+    <h2 className="card-title">{title}</h2>
+    <p className="card-description">{description}</p>
+  </article>
+);
+
+Card.propTypes = {
+  imgSrc: PropTypes.string.isRequired,
+  altText: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+};
+
 
 const HomePage = () => {
-  const cards = [
+  const cards = React.useMemo(() => [
     {
       imgSrc: kutman,
       altText: "Kutman",
@@ -19,16 +37,8 @@ const HomePage = () => {
       title: "John's journey to calm",
       description: "Course • Peaceful John",
     },
-  ];
-  const Card = ({ imgSrc, altText, title, description }) => (
-    <article className="card">
-      <figure>
-        <img src={imgSrc} alt={altText} loading="lazy" />
-      </figure>
-      <h2 className="card-title">{title}</h2>
-      <p className="card-description">{description}</p>
-    </article>
-  );
+  ], []);
+
   
   return (
     <>
